@@ -20,3 +20,9 @@ model Post {
   content String
   createdAt DateTime @default(now())
 }
+
+model User {
+  id Int @id
+  username String
+  url String
+}
