@@ -1,25 +1,14 @@
-"use client";
-import { createClient } from "@/utils/supabase/client";
+import { login, signup } from "./actions";
 
-export default function Page() {
-  const handleOnClick = async function signInWithGithub() {
-    const { data, error } = await createClient.auth.signInWithOAuth({
-      provider: "github",
-    });
-  };
-
+export default function LoginPage() {
   return (
-    <button
-      onClick={async () => {
-        await SupabaseAuthClient.auth.signInWithOAuth({
-          provider,
-          options: {
-            redirectTo: `http://example.com/auth/callback`,
-          },
-        });
-      }}
-    >
-      login
-    </button>
+    <form>
+      <label htmlFor="email">Email:</label>
+      <input id="email" name="email" type="email" required />
+      <label htmlFor="password">Password:</label>
+      <input id="password" name="password" type="password" required />
+      <button formAction={login}>Log in</button>
+      <button formAction={signup}>Sign up</button>
+    </form>
   );
 }
