@@ -44,3 +44,24 @@ export async function signup(formData: FormData) {
   revalidatePath("/", "layout");
   redirect("/");
 }
+
+export async function auth(formData: FormData) {
+  const supabase = createClient();
+
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: "github",
+    options: {
+      redirectTo: "http://localhost:3000/auth/callback",
+    },
+  });
+
+  if (data.url) {
+    redirect(data.url);
+  }
+}
+
+export async function signOut() {
+  const supabase = createClient();
+
+  const { error } = await supabase.auth.signOut();
+}
